@@ -13,8 +13,92 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body>
-    
+<body class="bg-gray-50 min-h-screen">
+
+    <section id="login-page" class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center border border-gray-100">
+            <i class="fa-brands fa-github text-6xl mb-4"></i>
+            <h1 class="text-2xl font-bold">GitHub Issues Tracker</h1>
+            <p class="text-gray-500 text-sm mb-6">Sign in to manage your issues</p>
+            
+            <form id="login-form" class="space-y-4 text-left">
+                <div class="form-control">
+                    <label class="label"><span class="label-text font-semibold">Username</span></label>
+                    <input type="text" id="username" placeholder="Enter Username" class="input input-bordered w-full" required />
+                    <span class="text-xs text-indigo-600 mt-1">Default: admin</span>
+                </div>
+                <div class="form-control">
+                    <label class="label"><span class="label-text font-semibold">Password</span></label>
+                    <input type="password" id="password" placeholder="Enter Password" class="input input-bordered w-full" required />
+                    <span class="text-xs text-indigo-600 mt-1">Default: admin123</span>
+                </div>
+                <button type="submit" class="btn btn-primary w-full bg-indigo-600 border-none hover:bg-indigo-700">Sign In</button>
+            </form>
+
+            <div class="divider">OR</div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-xs text-gray-400 mb-2">Demo Credentials:</p>
+                <p class="text-sm"><strong>Username:</strong> admin</p>
+                <p class="text-sm"><strong>Password:</strong> admin123</p>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="hidden">
+        <header class="navbar bg-white shadow-sm px-4 lg:px-12 border-b border-gray-200">
+            <div class="flex-1">
+                <a class="text-xl font-bold flex items-center gap-2">
+                    <i class="fa-brands fa-github"></i> GitHub Issues Tracker
+                </a>
+            </div>
+            <div class="flex-none gap-2">
+                <div class="join">
+                    <input id="search-input" type="text" placeholder="Search Issues..." class="input input-bordered join-item w-24 md:w-auto" />
+                    <button id="search-btn" class="btn btn-primary join-item bg-indigo-600 border-none"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <button class="btn btn-primary bg-indigo-600 border-none ml-2">+ New Issue</button>
+            </div>
+        </header>
+
+        <div class="container mx-auto p-4 lg:p-12">
+            <div class="flex justify-center gap-2 mb-8 bg-gray-100 p-2 rounded-lg w-fit mx-auto">
+                <button onclick="filterIssues('all')" class="tab-btn btn btn-sm bg-white shadow-sm px-8" id="tab-all">All</button>
+                <button onclick="filterIssues('open')" class="tab-btn btn btn-sm btn-ghost px-8" id="tab-open">Open</button>
+                <button onclick="filterIssues('closed')" class="tab-btn btn btn-sm btn-ghost px-8" id="tab-closed">Closed</button>
+            </div>
+
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="bg-indigo-100 p-2 rounded-lg text-indigo-600">
+                        <i class="fa-solid fa-circle-dot"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold"><span id="issue-count">0</span> Issues</h2>
+                        <p class="text-sm text-gray-500">Track and manage your project issues</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 text-sm font-semibold">
+                    <span class="text-green-600 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Open</span>
+                    <span class="text-purple-600 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Closed</span>
+                </div>
+            </div>
+
+            <div id="loader" class="flex justify-center my-20 hidden">
+                <span class="loading loading-spinner loading-lg text-primary"></span>
+            </div>
+
+            <div id="issues-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+    </main>
+
+    <input type="checkbox" id="issue-modal" class="modal-toggle" />
+    <div class="modal" role="dialog">
+        <div class="modal-box w-11/2 max-w-2xl" id="modal-content">
+            </div>
+        <label class="modal-backdrop" for="issue-modal">Close</label>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
